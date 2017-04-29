@@ -13,6 +13,7 @@ public class AppUserInfo {
     private String greetingInfo;
     private String userInfo;
     private String brief_intro;
+    private String searchFriends;
     public String getUserName() {
         return userName;
     }
@@ -83,5 +84,13 @@ public class AppUserInfo {
 
     public void setBrief_intro(String brief_intro) {
         this.brief_intro = brief_intro;
+    }
+
+    public String getSearchFriends() {
+        return searchFriends;
+    }
+
+    public void setSearchFriends(String searchFriends) {
+        this.searchFriends = searchFriends;
     }
 }

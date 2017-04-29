@@ -2,7 +2,38 @@
 <!DOCTYPE mapper PUBLIC
         "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="education.cs.scu.mapper.FriendMapper">
+    <resultMap id="FriendList" type="AppUserInfo">
+        <result column="username" property="userName"/>
+        <result column="nickname" property="nickName"/>
+        <result column="brief_intro" property="brief_intro"/>
+    </resultMap>
     <insert id="addFriend" parameterType="String">
         INSERT INTO friend_list(user_id, friends) VALUES (#{userName}, #{friendName})
     </insert>
+
+    <delete id="deleteFriend" parameterType="String">
+        DELETE FROM friend_list where user_id=#{userName}
+        AND friends=#{friendName}
+    </delete>
+
+    <select id="getFriendList" parameterType="AppUserInfo" resultMap="FriendList">
+        SELECT username, nickname, brief_intro
+        FROM appuser
+        WHERE (username IN
+        (SELECT friends FROM friend_list
+        WHERE user_id=#{userName}))
+    </select>
+
+    <select id="searchFriend" parameterType="AppUserInfo" resultMap="FriendList">
+        SELECT username, nickname
+        FROM appuser
+        <where>
+           <if test="userName !=null and userName !=''" >
+                username=#{userName}
+            </if>
+            <if test="nickName !=null and nickName !=''">
+                nickname=#{nickName}
+            </if>
+        </where>
+    </select>
 </mapper>

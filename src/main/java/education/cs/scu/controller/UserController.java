@@ -48,7 +48,6 @@ public class UserController {
     public String UserRegist(@RequestParam(value="username") String userName,
                                         @RequestParam(value="password") String password,
                                         @RequestParam(value="nickname") String nickName) throws Exception{
-
         nickName = URLDecoder.decode(nickName, "UTF-8");
         System.out.println(nickName);
         AppUserInfo user = new AppUserInfo();
