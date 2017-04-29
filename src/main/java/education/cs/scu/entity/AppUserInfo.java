@@ -14,6 +14,7 @@ public class AppUserInfo {
     private String userInfo;
     private String brief_intro;
     private String searchFriends;
+    private String getUpTime;
     public String getUserName() {
         return userName;
     }
@@ -92,5 +93,13 @@ public class AppUserInfo {
 
     public void setSearchFriends(String searchFriends) {
         this.searchFriends = searchFriends;
+    }
+
+    public String getGetUpTime() {
+        return getUpTime;
+    }
+
+    public void setGetUpTime(String getUpTime) {
+        this.getUpTime = getUpTime;
     }
 }

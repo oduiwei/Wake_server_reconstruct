@@ -7,4 +7,5 @@
     <bean id="loginService" class="education.cs.scu.service.impl.userServiceImpl"/>
     <bean id="checkInformation" class="education.cs.scu.checkInformation.checkInformationImpl.CheckInformationImpl"/>
     <bean id="friendService" class="education.cs.scu.service.impl.FriendServiceImpl"/>
+    <bean id="timeService" class="education.cs.scu.service.impl.TimeServiceImpl"/>
 </beans>
