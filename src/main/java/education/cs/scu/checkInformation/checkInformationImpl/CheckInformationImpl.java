@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CheckInformationImpl implements CheckInformation {
     @Autowired
-    CheckInformationMapper checkInformationMapper;
+    private CheckInformationMapper checkInformationMapper;
     @Override
     public boolean whetherUser(String userName) throws Exception {
         List<AppUserInfo> userInfos =  checkInformationMapper.whetherUser(userName);

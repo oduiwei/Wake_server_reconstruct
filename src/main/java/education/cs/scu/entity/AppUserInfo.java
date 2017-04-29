@@ -12,7 +12,7 @@ public class AppUserInfo {
     private String sleepList;
     private String greetingInfo;
     private String userInfo;
-
+    private String brief_intro;
     public String getUserName() {
         return userName;
     }
@@ -75,5 +75,13 @@ public class AppUserInfo {
 
     public void setUserInfo(String userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public String getBrief_intro() {
+        return brief_intro;
+    }
+
+    public void setBrief_intro(String brief_intro) {
+        this.brief_intro = brief_intro;
     }
 }
