@@ -45,5 +45,12 @@ public class TimeController {
             return "failed";
         }
     }
+    @RequestMapping("/TimeHistory")
+    public String getUpTimeHistory(@RequestParam("username") String userName) throws Exception{
+        TimeInfo timeInfo = new TimeInfo();
+        timeInfo.setUserName(userName);
+        timeInfo = timeService.getUptimeHistory(timeInfo);
+        return timeInfo.getGetUpTimeHistory();
+    }
 
 }
