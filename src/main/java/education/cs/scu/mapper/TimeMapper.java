@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface TimeMapper {
     int registTime(TimeInfo timeInfo) throws Exception;
-    List<TimeInfo> getUpTimeHstory(TimeInfo timeInfo) throws Exception;
+    List<TimeInfo> getUpTimeHistory(TimeInfo timeInfo) throws Exception;
     int registSleepTime(TimeInfo timeInfo) throws Exception;
+    List<TimeInfo> getSleepTimeHistory(TimeInfo timeInfo) throws Exception;
 }

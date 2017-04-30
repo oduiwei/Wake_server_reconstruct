@@ -23,4 +23,17 @@ public class userServiceImpl implements userService {
     public int doUserRegist(AppUserInfo user) throws Exception {
         return userMapper.doUserRegist(user);
     }
+
+    @Override
+    public AppUserInfo getUserInfo(AppUserInfo userInfo) throws Exception {
+        userInfo = userMapper.getUserInfo(userInfo);
+        String infos = userInfo.getUserName() + "#" + userInfo.getNickName() + "#" +userInfo.getBrief_intro();
+        userInfo.setUserInfo(infos);
+        return userInfo;
+    }
+
+    @Override
+    public int setUserInfo(AppUserInfo userInfo) throws Exception {
+        return userMapper.setUserInfo(userInfo);
+    }
 }

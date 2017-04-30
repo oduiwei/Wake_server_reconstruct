@@ -65,4 +65,33 @@ public class UserController {
             return "failed";
         }
     }
+
+    @RequestMapping(value="/GetUserInfo", produces = "text/html;charset=UTF-8")
+    public String GetUserInfo(@RequestParam(value="username") String userName) throws Exception{
+        AppUserInfo userInfo = new AppUserInfo();
+        userInfo.setUserName(userName);
+        userInfo = userService.getUserInfo(userInfo);
+
+        return userInfo.getUserInfo();
+    }
+
+    @RequestMapping(value="/SetUserInfo")
+    public String SetUserInfo(@RequestParam(value="username") String userName,
+                                          @RequestParam(value="nickname") String nickName,
+                                          @RequestParam(value="brief_intrp") String brief_intro) throws Exception{
+        nickName = URLDecoder.decode(nickName, "UTF-8");
+        brief_intro = URLDecoder.decode(brief_intro, "UTF-8");
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setUserName(userName);
+        appUserInfo.setNickName(nickName);
+        appUserInfo.setBrief_intro(brief_intro);
+
+        int setUserInfo = userService.setUserInfo(appUserInfo);
+        if(setUserInfo > 0)
+            return "success";
+        else
+            return "failed";
+    }
+
+
 }

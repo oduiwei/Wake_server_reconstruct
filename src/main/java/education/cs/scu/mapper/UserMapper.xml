@@ -6,6 +6,7 @@
         <result column="userName" property="userName"/>
         <result column="password" property="password"/>
         <result column="nickname" property="nickName"/>
+        <result column="brief_intro" property="brief_intro"/>
     </resultMap>
     <select id="doUserLogin" parameterType="AppUserInfo" resultMap="doUserLoginMap">
         SELECT * FROM appuser
@@ -17,4 +18,14 @@
         INSERT INTO appuser(username, password, nickname, brief_intro)
         VALUES(#{userName}, #{password}, #{nickname}, #{brief_intro})
     </insert>
+
+    <select id="getUserInfo" parameterType="AppUserInfo" resultMap="doUserLoginMap">
+        SELECT * FROM appuser
+        WHERE username=#{userName}
+    </select>
+
+    <update id="setUserInfo" parameterType="AppUserInfo">
+        UPDATE appuser SET nickname=#{nickName}, brief_intro = #{brief_intro}
+        WHERE username=#{userName}
+    </update>
 </mapper>

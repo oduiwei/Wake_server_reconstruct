@@ -9,4 +9,6 @@ public interface TimeService {
     TimeInfo getUptimeHistory(TimeInfo timeInfo) throws Exception;
     int registTime(TimeInfo timeInfo) throws Exception;
     int registSleepTime(TimeInfo timeInfo) throws Exception;
+
+    TimeInfo getSleepTimeHistory(TimeInfo timeinfo) throws Exception;
 }

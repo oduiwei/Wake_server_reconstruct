@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC
         "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="education.cs.scu.mapper.TimeMapper">
+    <resultMap id="timeInfo" type="TimeInfo">
+        <result column="username"  property="userName"/>
+        <result column="up_time" property="getUpTime"/>
+        <result column="sleepdate" property="sleepDate"/>
+        <result column="hours" property="hours"/>
+    </resultMap>
+
     <insert id="registTime" parameterType="TimeInfo">
         INSERT INTO getuptime(username, up_time) values(#{userName}, #{getUpTime})
     </insert>
@@ -9,4 +16,14 @@
     <insert id="registSleepTime" parameterType="TimeInfo">
         INSERT INTO sleepTime(username, hours, sleepdate) VALUES (#{userName}, #{hours}, #{sleepDate})
     </insert>
+
+    <select id="getUpTimeHistory" parameterType="TimeInfo" resultMap="timeInfo">
+        SELECT * FROM getuptime
+        WHERE username = #{userName}
+    </select>
+
+    <select id="getSleepTimeHistory" parameterType="TimeInfo" resultMap="timeInfo">
+        SELECT * FROM sleeptime
+        WHERE username=#{userName}
+    </select>
 </mapper>

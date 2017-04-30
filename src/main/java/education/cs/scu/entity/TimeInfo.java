@@ -9,6 +9,7 @@ public class TimeInfo {
     private String sleepDate;
     private String getUpTime;
     private String getUpTimeHistory;
+    private String sleepTimeHistory;
     public String getUserName() {
         return userName;
     }
@@ -47,5 +48,13 @@ public class TimeInfo {
 
     public void setGetUpTimeHistory(String getUpTimeHistory) {
         this.getUpTimeHistory = getUpTimeHistory;
+    }
+
+    public String getSleepTimeHistory() {
+        return sleepTimeHistory;
+    }
+
+    public void setSleepTimeHistory(String sleepTimeHistory) {
+        this.sleepTimeHistory = sleepTimeHistory;
     }
 }

@@ -53,4 +53,12 @@ public class TimeController {
         return timeInfo.getGetUpTimeHistory();
     }
 
+    @RequestMapping(value="/GetSleepTime")
+    public String GetSleepTimeHistory(@RequestParam("username") String userName) throws Exception{
+        TimeInfo timeInfo = new TimeInfo();
+        timeInfo.setUserName(userName);
+        timeInfo = timeService.getSleepTimeHistory(timeInfo);
+        return timeInfo.getSleepTimeHistory();
+    }
+
 }

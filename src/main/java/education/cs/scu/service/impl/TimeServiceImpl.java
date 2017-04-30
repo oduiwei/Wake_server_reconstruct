@@ -23,7 +23,7 @@ public class TimeServiceImpl implements TimeService {
     @Override
     public TimeInfo getUptimeHistory(TimeInfo timeInfo) throws Exception {
         String timeList="";
-        List<TimeInfo> timeInfos =  timeMapper.getUpTimeHstory(timeInfo);
+        List<TimeInfo> timeInfos =  timeMapper.getUpTimeHistory(timeInfo);
         for (TimeInfo Info: timeInfos
              ) {
             timeList += Info.getGetUpTime().substring(0, 19) + "#";
@@ -36,4 +36,18 @@ public class TimeServiceImpl implements TimeService {
     public int registSleepTime(TimeInfo timeInfo) throws Exception {
         return timeMapper.registSleepTime(timeInfo);
     }
+
+    @Override
+    public TimeInfo getSleepTimeHistory(TimeInfo timeInfo) throws Exception {
+        String SleepList="";
+        List<TimeInfo> timeInfos = timeMapper.getSleepTimeHistory(timeInfo);
+        for (TimeInfo info: timeInfos
+             ) {
+            SleepList += info.getSleepDate() +" "+ info.getHours() + "#";
+        }
+        timeInfo.setSleepTimeHistory(SleepList);
+
+        return timeInfo;
+    }
+
 }

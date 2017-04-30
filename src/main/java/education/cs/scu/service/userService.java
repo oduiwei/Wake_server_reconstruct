@@ -10,4 +10,6 @@ import java.util.List;
 public interface userService {
     List<AppUserInfo> doUserLogin(AppUserInfo user) throws Exception;
     int doUserRegist(AppUserInfo user) throws Exception;
+    AppUserInfo getUserInfo(AppUserInfo userInfo) throws Exception;
+    int setUserInfo(AppUserInfo userInfo) throws Exception;
 }
