@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC
         "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="education.cs.scu.mapper.TimeMapper">
-    <insert id="registTime" parameterType="AppUserInfo">
-        INSERT INTO getuptime(username, up_time) values(#{userName}, #{getUptime})
+    <insert id="registTime" parameterType="TimeInfo">
+        INSERT INTO getuptime(username, up_time) values(#{userName}, #{getUpTime})
+    </insert>
+
+    <insert id="registSleepTime" parameterType="TimeInfo">
+        INSERT INTO sleepTime(username, hours, sleepdate) VALUES (#{userName}, #{hours}, #{sleepDate})
     </insert>
 </mapper>

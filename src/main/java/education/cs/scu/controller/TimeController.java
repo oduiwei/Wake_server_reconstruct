@@ -1,6 +1,6 @@
 package education.cs.scu.controller;
 
-import education.cs.scu.entity.AppUserInfo;
+import education.cs.scu.entity.TimeInfo;
 import education.cs.scu.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,10 @@ public class TimeController {
     @Autowired
     TimeService timeService;
 
-    @RequestMapping("/GetUptime")
+    @RequestMapping("/GetUpTime")
     public String registTime(@RequestParam("username") String userName,
                              @RequestParam("date") String getUpTime) throws Exception{
-        AppUserInfo userInfo = new AppUserInfo();
+        TimeInfo userInfo = new TimeInfo();
         userInfo.setUserName(userName);
         userInfo.setGetUpTime(getUpTime);
         int registTime = timeService.registTime(userInfo);
@@ -28,4 +28,22 @@ public class TimeController {
         else
             return "failed";
     }
+
+    @RequestMapping("/SleepTime")
+    public String sleepTime(@RequestParam("username") String userName,
+                                        @RequestParam("hour") String hours,
+                                        @RequestParam("date") String sleepDate) throws Exception{
+        TimeInfo info = new TimeInfo();
+        info.setUserName(userName);
+        info.setHours(hours);
+        info.setSleepdate(sleepDate);
+
+        int registTime = timeService.registSleepTime(info);
+        if(registTime > 0){
+            return "success";
+        }else{
+            return "failed";
+        }
+    }
+
 }
