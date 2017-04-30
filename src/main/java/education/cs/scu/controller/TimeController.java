@@ -16,7 +16,7 @@ public class TimeController {
     @Autowired
     TimeService timeService;
 
-    @RequestMapping("/GetUpTime")
+    @RequestMapping(value="/GetUpTime", produces = "text/html;charset=UTF-8")
     public String registTime(@RequestParam("username") String userName,
                              @RequestParam("date") String getUpTime) throws Exception{
         TimeInfo userInfo = new TimeInfo();
@@ -29,7 +29,7 @@ public class TimeController {
             return "failed";
     }
 
-    @RequestMapping("/SleepTime")
+    @RequestMapping(value="/SleepTime", produces = "text/html;charset=UTF-8")
     public String sleepTime(@RequestParam("username") String userName,
                                         @RequestParam("hour") String hours,
                                         @RequestParam("date") String sleepDate) throws Exception{
@@ -45,7 +45,7 @@ public class TimeController {
             return "failed";
         }
     }
-    @RequestMapping("/TimeHistory")
+    @RequestMapping(value="/TimeHistory", produces = "text/html;charset=UTF-8")
     public String getUpTimeHistory(@RequestParam("username") String userName) throws Exception{
         TimeInfo timeInfo = new TimeInfo();
         timeInfo.setUserName(userName);
@@ -53,7 +53,7 @@ public class TimeController {
         return timeInfo.getGetUpTimeHistory();
     }
 
-    @RequestMapping(value="/GetSleepTime")
+    @RequestMapping(value="/GetSleepTime",produces = "text/html;charset=UTF-8")
     public String GetSleepTimeHistory(@RequestParam("username") String userName) throws Exception{
         TimeInfo timeInfo = new TimeInfo();
         timeInfo.setUserName(userName);

@@ -77,7 +77,7 @@ public class FriendsController {
         return appUserInfo.getSearchFriends();
     }
 
-    @RequestMapping(value="/SetGetUpTip")
+    @RequestMapping(value="/SetGetUpTip", produces = "text/html;charset=UTF-8")
     public String SetGetUpTip(@RequestParam("username") String userName,
                               @RequestParam("friendname") String friendName,
                               @RequestParam("tip") String tip ) throws Exception{
@@ -94,7 +94,7 @@ public class FriendsController {
             return "failed";
     }
 
-    @RequestMapping(value="/GetGetUpTip")
+    @RequestMapping(value="/GetGetUpTip",produces = "text/html;charset=UTF-8")
     public String GetWakeUpTip(@RequestParam("username") String userName) throws Exception{
         AppUserInfo user = new AppUserInfo();
         user.setUserName(userName);
