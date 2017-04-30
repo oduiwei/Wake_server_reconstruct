@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by maicius on 2017/3/31.
+ * Service
  */
 public interface userService {
     List<AppUserInfo> doUserLogin(AppUserInfo user) throws Exception;

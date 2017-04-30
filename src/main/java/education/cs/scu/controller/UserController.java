@@ -14,6 +14,10 @@ import java.util.List;
 
 /**
  * Created by maicius on 2017/3/31.
+ * Controller
+ * 后端入口，负责与前端通信
+ * UserController
+ * 负责处理涉及到用户信息的请求，比如登陆、注册、设置个人信息
  */
 @RestController
 public class UserController {
@@ -21,7 +25,7 @@ public class UserController {
     @Autowired
     userService userService;
 
-    @RequestMapping(value="/userLogin", produces="text/html;charset=UTF-8")
+    @RequestMapping(value="/LogLet", produces="text/html;charset=UTF-8")
     public String UserLogin(HttpServletRequest request,
                              @RequestParam(value="username") String userName,
                              @RequestParam(value="password") String password) throws Exception{
@@ -44,7 +48,8 @@ public class UserController {
 
     }
 
-    @RequestMapping(value="/userRegist", produces = "text/html;charset=UTF-8")
+    //当返回信息含有中文时需要加上 produces = "text/html;charset=UTF-8"
+    @RequestMapping(value="/RegLet", produces = "text/html;charset=UTF-8")
     public String UserRegist(@RequestParam(value="username") String userName,
                                         @RequestParam(value="password") String password,
                                         @RequestParam(value="nickname") String nickName) throws Exception{

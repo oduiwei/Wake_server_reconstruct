@@ -2,6 +2,7 @@ package education.cs.scu.entity;
 
 /**
  * Created by maicius on 2017/3/31.
+ * 实体类
  */
 public class AppUserInfo {
     private String userName;
