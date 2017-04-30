@@ -10,4 +10,7 @@ public interface FriendService {
     int deleteFriend(String userName, String friendName) throws Exception;
     AppUserInfo getFriendList(AppUserInfo user) throws Exception;
     AppUserInfo searchFriend(AppUserInfo user) throws Exception;
+    int setGetUpTip(AppUserInfo userInfo) throws Exception;
+
+    AppUserInfo getWakeUpTip(AppUserInfo user) throws Exception;
 }

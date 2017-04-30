@@ -48,4 +48,25 @@ public class FriendServiceImpl implements FriendService {
         user.setSearchFriends(friend);
         return user;
     }
+    @Override
+    public int setGetUpTip(AppUserInfo userInfo) throws Exception {
+        return friendMapper.setGetUpTip(userInfo);
+    }
+
+    @Override
+    public AppUserInfo getWakeUpTip(AppUserInfo user) throws Exception {
+        List<AppUserInfo> appUserInfos = friendMapper.getGetUpTip(user);
+        int n = appUserInfos.size();
+        AppUserInfo info;
+        if(n>0) {
+            info = appUserInfos.get(n-1);
+            info.setGreetingInfo(info.getTip() + "#" + info.getNickName());
+            return info;
+        }else{
+            info = new AppUserInfo();
+            info.setGreetingInfo("");
+            return info;
+        }
+    }
+
 }

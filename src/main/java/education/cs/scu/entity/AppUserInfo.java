@@ -14,6 +14,8 @@ public class AppUserInfo {
     private String userInfo;
     private String brief_intro;
     private String searchFriends;
+    private String friendName;
+    private String tip;
     public String getUserName() {
         return userName;
     }
@@ -92,5 +94,21 @@ public class AppUserInfo {
 
     public void setSearchFriends(String searchFriends) {
         this.searchFriends = searchFriends;
+    }
+
+    public String getFriendName() {
+        return friendName;
+    }
+
+    public void setFriendName(String friendName) {
+        this.friendName = friendName;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
     }
 }

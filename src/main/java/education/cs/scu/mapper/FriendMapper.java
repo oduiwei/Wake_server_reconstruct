@@ -13,4 +13,6 @@ public interface FriendMapper {
     int deleteFriend(@Param("userName") String userName, @Param("friendName") String friendName) throws Exception;
     List<AppUserInfo> getFriendList(AppUserInfo userInfo) throws Exception;
     List<AppUserInfo> searchFriend(AppUserInfo userInfo) throws Exception;
+    int setGetUpTip(AppUserInfo user) throws Exception;
+    List<AppUserInfo> getGetUpTip(AppUserInfo user) throws Exception;
 }

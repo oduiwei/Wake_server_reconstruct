@@ -76,4 +76,29 @@ public class FriendsController {
 
         return appUserInfo.getSearchFriends();
     }
+
+    @RequestMapping(value="/SetGetUpTip")
+    public String SetGetUpTip(@RequestParam("username") String userName,
+                              @RequestParam("friendname") String friendName,
+                              @RequestParam("tip") String tip ) throws Exception{
+        tip = URLDecoder.decode(tip, "UTF-8");
+        AppUserInfo appUserInfo = new AppUserInfo();
+        appUserInfo.setUserName(userName);
+        appUserInfo.setFriendName(friendName);
+        appUserInfo.setTip(tip);
+
+        int info = friendService.setGetUpTip(appUserInfo);
+        if(info > 0)
+            return "success";
+        else
+            return "failed";
+    }
+
+    @RequestMapping(value="/GetGetUpTip")
+    public String GetWakeUpTip(@RequestParam("username") String userName) throws Exception{
+        AppUserInfo user = new AppUserInfo();
+        user.setUserName(userName);
+        user = friendService.getWakeUpTip(user);
+        return user.getGreetingInfo();
+    }
 }
