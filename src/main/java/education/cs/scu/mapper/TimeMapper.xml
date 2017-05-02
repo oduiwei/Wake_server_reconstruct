@@ -14,7 +14,7 @@
     </insert>
 
     <insert id="registSleepTime" parameterType="TimeInfo">
-        INSERT INTO sleepTime(username, hours, sleepdate) VALUES (#{userName}, #{hours}, #{sleepDate})
+        INSERT INTO sleepTime_2(username, hours, sleepdate) VALUES (#{userName}, #{hours}, #{sleepDate})
     </insert>
 
     <select id="getUpTimeHistory" parameterType="TimeInfo" resultMap="timeInfo">
@@ -23,7 +23,7 @@
     </select>
 
     <select id="getSleepTimeHistory" parameterType="TimeInfo" resultMap="timeInfo">
-        SELECT * FROM sleeptime
+        SELECT * FROM sleeptime_2
         WHERE username=#{userName}
     </select>
 </mapper>

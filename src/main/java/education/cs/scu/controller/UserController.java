@@ -40,7 +40,7 @@ public class UserController {
 
         if(!loginUsers.isEmpty()) {
             System.out.println(loginUsers.get(0).getNickName());
-            return loginUsers.get(0).getNickName();
+            return "success#" + loginUsers.get(0).getNickName();
 
         }else{
             return "failed";
@@ -83,7 +83,7 @@ public class UserController {
     @RequestMapping(value="/SetUserInfo")
     public String SetUserInfo(@RequestParam(value="username") String userName,
                                           @RequestParam(value="nickname") String nickName,
-                                          @RequestParam(value="brief_intrp") String brief_intro) throws Exception{
+                                          @RequestParam(value="brief_intro") String brief_intro) throws Exception{
         nickName = URLDecoder.decode(nickName, "UTF-8");
         brief_intro = URLDecoder.decode(brief_intro, "UTF-8");
         AppUserInfo appUserInfo = new AppUserInfo();

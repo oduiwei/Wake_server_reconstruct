@@ -50,6 +50,7 @@ public class TimeController {
         TimeInfo timeInfo = new TimeInfo();
         timeInfo.setUserName(userName);
         timeInfo = timeService.getUptimeHistory(timeInfo);
+        System.out.println(timeInfo.getGetUpTimeHistory());
         return timeInfo.getGetUpTimeHistory();
     }
 
@@ -58,6 +59,7 @@ public class TimeController {
         TimeInfo timeInfo = new TimeInfo();
         timeInfo.setUserName(userName);
         timeInfo = timeService.getSleepTimeHistory(timeInfo);
+        System.out.println(timeInfo.getSleepTimeHistory());
         return timeInfo.getSleepTimeHistory();
     }
 

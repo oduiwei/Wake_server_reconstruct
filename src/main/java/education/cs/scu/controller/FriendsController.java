@@ -22,7 +22,7 @@ public class FriendsController {
     FriendService friendService;
 
     @RequestMapping(value="/AddFriend", produces = "text/html;charset=UTF-8")
-    public String AddFriend(@RequestParam("userName") String userName,
+    public String AddFriend(@RequestParam("username") String userName,
                             @RequestParam("friendName") String friendName) throws Exception{
         AppUserInfo user = new AppUserInfo();
         user.setUserName(userName);
@@ -47,7 +47,7 @@ public class FriendsController {
     }
 
     @RequestMapping(value="/DeleteFriend", produces = "text/html;charset=UTF-8")
-    public String DeleteFriend(@RequestParam("userName") String userName,
+    public String DeleteFriend(@RequestParam("username") String userName,
                                             @RequestParam("friendName") String friendName) throws Exception{
         int delete = friendService.deleteFriend(userName, friendName);
         if(delete > 0)
@@ -56,7 +56,7 @@ public class FriendsController {
             return "failed";
     }
 
-    @RequestMapping(value="/GetFriendList", produces = "text/html;charset=UTF-8")
+    @RequestMapping(value="/GetFriendsList", produces = "text/html;charset=UTF-8")
     public String getFriendList(@RequestParam("username") String userName) throws Exception{
             AppUserInfo user = new AppUserInfo();
             user.setUserName(userName);
@@ -67,13 +67,15 @@ public class FriendsController {
     @RequestMapping(value="/SearchFriend", produces = "text/html;charset=UTF-8")
     public String searchFriend(@RequestParam("username") String username,
                                             @RequestParam("friendName") String friendNickName) throws Exception{
-        String userName = URLDecoder.decode(username, "UTF-8");
+        //此处由于前端不正常对复用导致命名不正常，username应为nickName，friendName应为username
+        String nickName = URLDecoder.decode(username, "UTF-8");
         friendNickName = URLDecoder.decode(friendNickName, "UTF-8");
         AppUserInfo appUserInfo = new AppUserInfo();
-        appUserInfo.setUserName(userName);
-        appUserInfo.setNickName(friendNickName);
+        appUserInfo.setNickName(nickName);
+        appUserInfo.setUserName(friendNickName);
+        //System.out.println(appUserInfo.getUserName()+" " +appUserInfo.getNickName());
         appUserInfo = friendService.searchFriend(appUserInfo);
-
+        System.out.println(appUserInfo.getSearchFriends());
         return appUserInfo.getSearchFriends();
     }
 
