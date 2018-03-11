@@ -32,9 +32,10 @@ public class UserController {
         AppUserInfo user = new AppUserInfo();
         user.setUserName(userName);
         user.setPassword(password);
-        System.out.println(request.getCharacterEncoding());
-        System.out.println(Charset.defaultCharset());
-        System.out.println(userName+"昵称");
+//        System.out.println(request.getCharacterEncoding());
+//        System.out.println(Charset.defaultCharset());
+//        System.out.println(userName+"昵称");
+        System.out.println("欢迎" + userName);
 
         List<AppUserInfo> loginUsers = userService.doUserLogin(user);
 

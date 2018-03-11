@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="education.cs.scu.mapper.SleepMapper">
+    <resultMap id="UserPeriodSleepData" type="SleepInfo">
+        <result column="sleepdate" property="sleepDate" />
+        <result column="totalsleep" property="totalSleep" />
+        <result column="lightsleep" property="lightSleep" />
+        <result column="deepsleep" property="deepSleep" />
+        <result column="sleeptime" property="sleepTime" />
+        <result column="uptime" property="upTime" />
+    </resultMap>
+
+    <select id="getUserPeriodSleepData" parameterType="String" resultMap="UserPeriodSleepData">
+        SELECT * FROM sleep_info
+        WHERE username = #{username}
+        <if test="start != null and start != ''">
+            AND sleepdate &gt;= #{start}
+        </if>
+        <if test="end != null and end != ''">
+            AND sleepdate &lt;= #{end};
+        </if>
+    </select>
+
+</mapper>

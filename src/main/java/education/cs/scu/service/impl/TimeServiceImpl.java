@@ -1,10 +1,13 @@
 package education.cs.scu.service.impl;
 
+import education.cs.scu.entity.SleepInfo;
 import education.cs.scu.entity.TimeInfo;
+import education.cs.scu.mapper.SleepMapper;
 import education.cs.scu.mapper.TimeMapper;
 import education.cs.scu.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +17,22 @@ public class TimeServiceImpl implements TimeService {
 
     @Autowired
     TimeMapper timeMapper;
+
+    @Autowired
+    SleepMapper sleepMapper;
+
+    /**
+     * 根据用户名和过滤选项查询某个时间段内用户的起床时间记录
+     * @param username   --> 用户名
+     * @param start      --> 起始时间
+     * @param end        --> 截至时间
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<SleepInfo> getUptimeHistory(String username, String start, String end) throws Exception {
+        return sleepMapper.getUserPeriodSleepData(username, start, end);
+    }
 
     @Override
     public int registTime(TimeInfo timeInfo) throws Exception {

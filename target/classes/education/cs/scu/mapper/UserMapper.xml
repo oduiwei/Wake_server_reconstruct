@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="education.cs.scu.mapper.UserMapper">
+    <resultMap id ="doUserLoginMap" type="AppUserInfo">
+        <result column="userName" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickName"/>
+        <result column="brief_intro" property="brief_intro"/>
+    </resultMap>
+    <select id="doUserLogin" parameterType="AppUserInfo" resultMap="doUserLoginMap">
+        SELECT * FROM appuser
+        WHERE  username = #{userName}
+        AND password = #{password}
+    </select>
+
+    <insert id="doUserRegist" parameterType="AppUserInfo">
+        INSERT INTO appuser(username, password, nickname, brief_intro)
+        VALUES(#{userName}, #{password}, #{nickname}, #{brief_intro})
+    </insert>
+
+    <select id="getUserInfo" parameterType="AppUserInfo" resultMap="doUserLoginMap">
+        SELECT * FROM appuser
+        WHERE username=#{userName}
+    </select>
+
+    <update id="setUserInfo" parameterType="AppUserInfo">
+        UPDATE appuser SET nickname=#{nickName}, brief_intro = #{brief_intro}
+        WHERE username=#{userName}
+    </update>
+</mapper>

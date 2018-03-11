@@ -1,6 +1,9 @@
 package education.cs.scu.service;
 
+import education.cs.scu.entity.SleepInfo;
 import education.cs.scu.entity.TimeInfo;
+
+import java.util.List;
 
 /**
  * Created by maicius on 2017/4/30.
@@ -11,4 +14,6 @@ public interface TimeService {
     int registSleepTime(TimeInfo timeInfo) throws Exception;
 
     TimeInfo getSleepTimeHistory(TimeInfo timeinfo) throws Exception;
+
+    List<SleepInfo> getUptimeHistory(String username, String start, String end) throws Exception;
 }

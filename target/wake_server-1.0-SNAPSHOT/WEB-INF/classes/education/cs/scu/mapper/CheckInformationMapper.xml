@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="education.cs.scu.mapper.CheckInformationMapper">
+    <resultMap id ="doUserLoginMap" type="AppUserInfo">
+        <result column="userName" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="nickName" property="nickName"/>
+    </resultMap>
+
+    <select id="whetherUser" parameterType="String" resultMap="doUserLoginMap">
+        SELECT * FROM appuser
+        WHERE  username = #{userName}
+    </select>
+    <select id="whetherFriends" parameterType="String" resultType="integer">
+        SELECT frineds_id FROM friend_list
+        WHERE  user_id = #{userName}
+        AND friends = #{friendName}
+    </select>
+</mapper>
