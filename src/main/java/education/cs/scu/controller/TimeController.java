@@ -18,10 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * Created by maicius on 2017/4/30.
- */
 @RestController
 public class TimeController {
     @Autowired
@@ -90,6 +86,38 @@ public class TimeController {
         }
 
         jsonObject.put("data", jsonArray);
+        return jsonObject.toString();
+    }
+
+    /**
+     * 获取用户某段时间内睡眠时间记录
+     * @param username --> 用户名
+     * @param start    --> 起始时间
+     * @param end      --> 截止时间
+     * @return         --> 返回数据JSON格式的字符串
+     * @throws Exception
+     */
+    @RequestMapping(value = "/GetSleepDurationHistory", produces = "application/json;charset=UTF-8")
+    public String getUserSleepDurationHistory(@RequestParam("username") String username,
+                                              @RequestParam("start") String start,
+                                              @RequestParam("end") String end) throws Exception {
+        List<SleepInfo> sleepInfos = getUserSleepData(username, start, end);
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (SleepInfo info : sleepInfos) {
+            JSONObject tmp = new JSONObject();
+            JSONObject duration = new JSONObject();
+            duration.put("totalsleep", info.getTotalSleep());
+            duration.put("lightsleep", info.getLightSleep());
+            duration.put("deepsleep", info.getDeepSleep());
+            tmp.put(info.getSleepDate(), duration);
+            jsonArray.add(tmp);
+        }
+
+        jsonObject.put("data", jsonArray);
+
         return jsonObject.toString();
     }
 
