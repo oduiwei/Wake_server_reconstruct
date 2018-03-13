@@ -9,7 +9,8 @@
         <result column="brief_intro" property="tip"/>
     </resultMap>
     <insert id="addFriend" parameterType="String">
-        INSERT INTO friend_list(user_id, friends) VALUES (#{userName}, #{friendName})
+        INSERT INTO friend_list(user_id, friends, relation)
+        VALUES (#{userName}, #{friendName}, 0);
     </insert>
 
     <delete id="deleteFriend" parameterType="String">
@@ -47,4 +48,11 @@
         SELECT greeting_text, nickname FROM greeting, appuser
         WHERE send_user = appuser.username AND receive_user = #{userName}
     </select>
+
+    <update id="setRelation" parameterType="String">
+        UPDATE friend_list
+        SET relation = 1
+        WHERE user_id = #{userName}
+        AND friends = #{friendName};
+    </update>
 </mapper>

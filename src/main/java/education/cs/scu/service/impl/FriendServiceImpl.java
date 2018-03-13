@@ -24,6 +24,11 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
+    public int setIntimacyRelation(String userName, String friendName) throws Exception {
+        return friendMapper.setRelation(userName, friendName);
+    }
+
+    @Override
     public AppUserInfo getFriendList(AppUserInfo user) throws Exception {
         String friendList = "";
         List<AppUserInfo> appUserInfos = friendMapper.getFriendList(user);

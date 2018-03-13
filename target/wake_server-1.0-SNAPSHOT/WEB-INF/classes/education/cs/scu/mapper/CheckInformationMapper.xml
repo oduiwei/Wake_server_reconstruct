@@ -13,7 +13,7 @@
         WHERE  username = #{userName}
     </select>
     <select id="whetherFriends" parameterType="String" resultType="integer">
-        SELECT frineds_id FROM friend_list
+        SELECT friends_id FROM friend_list
         WHERE  user_id = #{userName}
         AND friends = #{friendName}
     </select>

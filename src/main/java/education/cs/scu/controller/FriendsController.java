@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLDecoder;
 
-/**
- * Created by maicius on 2017/4/22.
- */
 @RestController
 public class FriendsController {
 
@@ -24,8 +21,6 @@ public class FriendsController {
     @RequestMapping(value="/AddFriend", produces = "text/html;charset=UTF-8")
     public String AddFriend(@RequestParam("username") String userName,
                             @RequestParam("friendName") String friendName) throws Exception{
-        AppUserInfo user = new AppUserInfo();
-        user.setUserName(userName);
         boolean whetherUser = checkInformation.whetherUser(friendName);
         if(whetherUser){
             boolean whetherFriends = checkInformation.whetherFriends(userName, friendName);
@@ -48,9 +43,26 @@ public class FriendsController {
 
     @RequestMapping(value="/DeleteFriend", produces = "text/html;charset=UTF-8")
     public String DeleteFriend(@RequestParam("username") String userName,
-                                            @RequestParam("friendName") String friendName) throws Exception{
+                               @RequestParam("friendName") String friendName) throws Exception{
         int delete = friendService.deleteFriend(userName, friendName);
         if(delete > 0)
+            return "success";
+        else
+            return "failed";
+    }
+
+    /**
+     * 设置亲友
+     * @param username   --> 用户名
+     * @param friendName --> 好友用户名
+     * @return           --> 成功返回success，失败返回failed
+     * @throws Exception
+     */
+    @RequestMapping(value = "/SetRelation", produces = "text/html;charset=UTF-8")
+    public String setIntimacyRelation(@RequestParam("username") String username,
+                                      @RequestParam("friendName") String friendName) throws Exception {
+        int num = friendService.setIntimacyRelation(username, friendName);
+        if (num > 0)
             return "success";
         else
             return "failed";
@@ -66,7 +78,7 @@ public class FriendsController {
 
     @RequestMapping(value="/SearchFriend", produces = "text/html;charset=UTF-8")
     public String searchFriend(@RequestParam("username") String username,
-                                            @RequestParam("friendName") String friendNickName) throws Exception{
+                               @RequestParam("friendName") String friendNickName) throws Exception{
         //此处由于前端不正常对复用导致命名不正常，username应为nickName，friendName应为username
         String nickName = URLDecoder.decode(username, "UTF-8");
         friendNickName = URLDecoder.decode(friendNickName, "UTF-8");

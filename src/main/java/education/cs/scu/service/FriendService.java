@@ -13,4 +13,5 @@ public interface FriendService {
     int setGetUpTip(AppUserInfo userInfo) throws Exception;
 
     AppUserInfo getWakeUpTip(AppUserInfo user) throws Exception;
+    int setIntimacyRelation(String userName, String friendName) throws Exception;
 }
