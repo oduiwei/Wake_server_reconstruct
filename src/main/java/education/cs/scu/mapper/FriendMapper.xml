@@ -14,16 +14,22 @@
     </insert>
 
     <delete id="deleteFriend" parameterType="String">
-        DELETE FROM friend_list where user_id=#{userName}
-        AND friends=#{friendName}
+        DELETE FROM friend_list
+        WHERE (user_id=#{userName} AND friends=#{friendName})
+        OR (user_id=#{friendName} AND friends=#{userName});
     </delete>
 
     <select id="getFriendList" parameterType="AppUserInfo" resultMap="FriendList">
         SELECT username, nickname, brief_intro
         FROM appuser
-        WHERE (username IN
-        (SELECT friends FROM friend_list
-        WHERE user_id=#{userName}))
+        WHERE username IN (
+        SELECT friends
+        FROM friend_list
+        WHERE user_id=#{userName}
+        UNION
+        SELECT user_id
+        FROM friend_list
+        WHERE friends=#{userName});
     </select>
 
     <select id="searchFriend" parameterType="AppUserInfo" resultMap="FriendList">

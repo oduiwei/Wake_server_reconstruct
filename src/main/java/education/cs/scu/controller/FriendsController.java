@@ -52,6 +52,24 @@ public class FriendsController {
     }
 
     /**
+     * 检查是否是亲友关系
+     * @param username
+     * @param friendName
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/CheckRelation", produces = "text/html;charset=UTF-8")
+    public String checkIntimacyRelation(@RequestParam("username") String username,
+                                        @RequestParam("friendName") String friendName) throws Exception {
+        boolean relation = checkInformation.whetherIntimacy(username, friendName);
+        if (relation) {
+            return "isrelation";
+        } else {
+            return "notrelation";
+        }
+    }
+
+    /**
      * 设置亲友
      * @param username   --> 用户名
      * @param friendName --> 好友用户名
@@ -61,11 +79,16 @@ public class FriendsController {
     @RequestMapping(value = "/SetRelation", produces = "text/html;charset=UTF-8")
     public String setIntimacyRelation(@RequestParam("username") String username,
                                       @RequestParam("friendName") String friendName) throws Exception {
-        int num = friendService.setIntimacyRelation(username, friendName);
-        if (num > 0)
-            return "success";
-        else
-            return "failed";
+        boolean whetherIntimacy = checkInformation.whetherIntimacy(username, friendName);
+        if (!whetherIntimacy) {
+            int num = friendService.setIntimacyRelation(username, friendName);
+            if (num > 0)
+                return "success";
+            else
+                return "failed";
+        } else {
+            return "already";
+        }
     }
 
     @RequestMapping(value="/GetFriendsList", produces = "text/html;charset=UTF-8")

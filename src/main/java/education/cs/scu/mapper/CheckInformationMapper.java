@@ -12,4 +12,6 @@ public interface CheckInformationMapper {
 
     List<AppUserInfo> whetherUser(String userName) throws Exception;
     List<Integer> whetherFriends(@Param("userName") String userName, @Param("friendName") String friendName) throws Exception;
+    int whetherIntimacy(@Param("userName") String userName,
+                        @Param("friendName") String friendName) throws Exception;
 }

@@ -6,4 +6,5 @@ package education.cs.scu.checkInformation;
 public interface CheckInformation {
     boolean whetherUser(String userName) throws Exception;
     boolean whetherFriends(String userName, String friendName) throws Exception;
+    boolean whetherIntimacy(String userName, String friendName) throws Exception;
 }

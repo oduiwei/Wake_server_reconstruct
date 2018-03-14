@@ -16,7 +16,7 @@ public class CheckInformationImpl implements CheckInformation {
     @Override
     public boolean whetherUser(String userName) throws Exception {
         List<AppUserInfo> userInfos =  checkInformationMapper.whetherUser(userName);
-        if(userInfos == null)
+        if(userInfos.size() == 0)
             return false;
         else
             return true;
@@ -25,7 +25,16 @@ public class CheckInformationImpl implements CheckInformation {
     @Override
     public boolean whetherFriends(String userName, String friendName) throws Exception {
         List<Integer> info = checkInformationMapper.whetherFriends(userName, friendName);
-        if(info == null)
+        if(info.size() != 0)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public boolean whetherIntimacy(String userName, String friendName) throws Exception {
+        int relation = checkInformationMapper.whetherIntimacy(userName, friendName);
+        if (relation == 1)
             return true;
         else
             return false;

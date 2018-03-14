@@ -14,7 +14,18 @@
     </select>
     <select id="whetherFriends" parameterType="String" resultType="integer">
         SELECT friends_id FROM friend_list
-        WHERE  user_id = #{userName}
-        AND friends = #{friendName}
+        WHERE (user_id = #{userName} AND friends = #{friendName})
+        OR (user_id=#{friendName} AND friends=#{userName});
+    </select>
+    <select id="whetherIntimacy" parameterType="String" resultType="integer">
+        SELECT relation
+        FROM friend_list
+        WHERE user_id=#{userName}
+        AND friends=#{friendName}
+        UNION
+        SELECT relation
+        FROM friend_list
+        WHERE user_id=#{friendName}
+        AND friends=#{userName};
     </select>
 </mapper>
