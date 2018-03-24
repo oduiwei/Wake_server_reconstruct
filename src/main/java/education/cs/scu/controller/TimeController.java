@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import education.cs.scu.entity.RecentSleepInfo;
 import education.cs.scu.entity.SleepInfo;
 import education.cs.scu.entity.TimeInfo;
 import education.cs.scu.service.TimeService;
@@ -118,6 +119,87 @@ public class TimeController {
 
         jsonObject.put("data", jsonArray);
 
+        return jsonObject.toString();
+    }
+
+    /**
+     * 获取用户与其好友的睡眠排名数据
+     * @param username  --> 用户名
+     * @return          --> 返回数据JSON格式的字符串
+     * @throws Exception
+     */
+    @RequestMapping(value = "/GetFriendsSleepRank", produces = "application/json;charset=UTF-8")
+    public String getFriendsSleepRank(@RequestParam("username") String username) throws Exception {
+        List<RecentSleepInfo> rank = timeService.getFriendsSleepRank(username);
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (RecentSleepInfo info : rank) {
+            JSONObject tmp = new JSONObject();
+            JSONObject value = new JSONObject();
+            value.put("avg_total", info.getAvgTotal());
+            value.put("avg_sleep", info.getAvgSleep());
+            value.put("avg_up", info.getAvgUp());
+            value.put("qlty_bad", info.getQltyBad());
+            value.put("qlty_ord", info.getQltyOrd());
+            value.put("qlty_good", info.getQltyGood());
+            value.put("score", info.getScore());
+            value.put("nickname", info.getNickname());
+            tmp.put(info.getUsername(), value);
+            jsonArray.add(tmp);
+        }
+
+        jsonObject.put("data", jsonArray);
+        return jsonObject.toString();
+    }
+
+    /**
+     * 获取用户最近睡眠建议
+     * @param username  --> 用户名
+     * @return          --> 根据睡眠评分返回不同的建议
+     * @throws Exception
+     */
+    @RequestMapping(value = "/GetSleepAdvice", produces = "application/json;charset=UTF-8")
+    public String getRecentSleepAdvice(@RequestParam("username") String username) throws Exception {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        RecentSleepInfo info = timeService.getUserRecentSleepInfo(username);
+        int score = info.getScore();
+        float sleep = info.getAvgSleep();
+        float up = info.getAvgUp();
+        float total = info.getAvgTotal();
+
+        boolean flag = false;
+        if (score < 60) {
+            jsonArray.add("您最近睡眠质量不是很好，请继续加油哦！");
+        } else if (score < 80) {
+            jsonArray.add("您最近睡眠质量一般，您还可以做得更好哦！");
+        } else {
+            jsonArray.add("您最近睡眠质量非常好，请继续保持哦！");
+        }
+        jsonArray.add("\n您的平均睡眠时长为：" + total);
+        jsonArray.add("\n您的平均睡觉睡觉时间为：" + sleep);
+        jsonArray.add("\n您的平均起床时间为：" + up);
+        jsonArray.add("\n给您的建议：");
+        if (total < 8) {
+            jsonArray.add("\n-- 睡眠时长较短，不如多睡一会儿！");
+            flag = true;
+        }
+        if (sleep >= 1) {
+            jsonArray.add("\n-- 睡觉时间较晚，长时间熬夜可不好哦！");
+            flag = true;
+        }
+        if (up < 6) {
+            jsonArray.add("\n-- 起床时间较早，持续太早起可不好哦！");
+            flag = true;
+        }
+        if (!flag) {
+            jsonArray.add("\n-- 睡眠良好，请继续保持哦！");
+        }
+
+        jsonObject.put("data", jsonArray);
         return jsonObject.toString();
     }
 

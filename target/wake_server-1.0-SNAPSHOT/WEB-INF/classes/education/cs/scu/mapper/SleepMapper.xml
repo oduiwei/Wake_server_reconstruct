@@ -9,6 +9,7 @@
         <result column="deepsleep" property="deepSleep" />
         <result column="sleeptime" property="sleepTime" />
         <result column="uptime" property="upTime" />
+        <result column="quality" property="quality" />
     </resultMap>
 
     <select id="getUserPeriodSleepData" parameterType="String" resultMap="UserPeriodSleepData">

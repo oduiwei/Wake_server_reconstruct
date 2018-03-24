@@ -1,5 +1,6 @@
 package education.cs.scu.service.impl;
 
+import education.cs.scu.entity.RecentSleepInfo;
 import education.cs.scu.entity.SleepInfo;
 import education.cs.scu.entity.TimeInfo;
 import education.cs.scu.mapper.SleepMapper;
@@ -32,6 +33,39 @@ public class TimeServiceImpl implements TimeService {
     @Override
     public List<SleepInfo> getUptimeHistory(String username, String start, String end) throws Exception {
         return sleepMapper.getUserPeriodSleepData(username, start, end);
+    }
+
+    /**
+     * 更新用户最近睡眠数据
+     * @param sleepInfo  --> 用户最近睡眠数据
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updRecentSleepInfo(RecentSleepInfo sleepInfo) throws Exception {
+        return timeMapper.updRecentSleepInfo(sleepInfo);
+    }
+
+    /**
+     * 获取用户及其好友最近睡眠排民数据
+     * @param username  --> 用户名
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<RecentSleepInfo> getFriendsSleepRank(String username) throws Exception {
+        return timeMapper.getFriendsSleepRank(username);
+    }
+
+    /**
+     * 获取用户最近睡眠数据
+     * @param username
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public RecentSleepInfo getUserRecentSleepInfo(String username) throws Exception {
+        return timeMapper.getUserRecentSleepInfo(username);
     }
 
     @Override
@@ -68,5 +102,4 @@ public class TimeServiceImpl implements TimeService {
 
         return timeInfo;
     }
-
 }

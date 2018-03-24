@@ -1,7 +1,7 @@
 package education.cs.scu.controller;
 
 import education.cs.scu.entity.AppUserInfo;
-import education.cs.scu.service.userService;
+import education.cs.scu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +23,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    userService userService;
+    UserService userService;
 
     @RequestMapping(value="/LogLet", produces="text/html;charset=UTF-8")
     public String UserLogin(HttpServletRequest request,

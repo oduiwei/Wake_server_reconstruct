@@ -2,17 +2,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        ">
 
     <!-- 可以扫描controller、service、...
     这里让扫描controller，指定controller的包
      -->
     <context:component-scan base-package="education.cs.scu.controller"/>
+    <!--task任务扫描注解-->
+    <task:annotation-driven />
+    <!--扫描任务-->
+    <context:component-scan base-package="education.cs.scu.task" />
 
 
     <!--注解映射器 -->
@@ -31,13 +39,13 @@
     <!-- 视图解析器
     解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包
      -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!-- 配置jsp路径的前缀 -->
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <!-- 配置jsp路径的后缀 -->
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!--<bean-->
+            <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--&lt;!&ndash; 配置jsp路径的前缀 &ndash;&gt;-->
+        <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+        <!--&lt;!&ndash; 配置jsp路径的后缀 &ndash;&gt;-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
 
     <!--&lt;!&ndash; 拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->

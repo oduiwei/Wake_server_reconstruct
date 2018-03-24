@@ -28,4 +28,8 @@
         UPDATE appuser SET nickname=#{nickName}, brief_intro = #{brief_intro}
         WHERE username=#{userName}
     </update>
+
+    <select id="getAllUsers" resultMap="doUserLoginMap">
+        SELECT * FROM appuser;
+    </select>
 </mapper>

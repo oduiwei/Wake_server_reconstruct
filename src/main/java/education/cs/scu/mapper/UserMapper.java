@@ -12,4 +12,5 @@ public interface UserMapper {
     int doUserRegist(AppUserInfo user) throws Exception;
     AppUserInfo getUserInfo(AppUserInfo userInfo) throws Exception;
     int setUserInfo(AppUserInfo user) throws Exception;
+    List<AppUserInfo> getAllUsers() throws Exception;
 }

@@ -9,6 +9,15 @@ public class SleepInfo {
     private String deepSleep;   //当天深睡总时间
     private String sleepTime;   //睡觉时间
     private String upTime;      //起床时间
+    private int quality;        //睡眠质量
+
+    public int getQuality() {
+        return quality;
+    }
+
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
 
     public String getUsername() {
         return username;

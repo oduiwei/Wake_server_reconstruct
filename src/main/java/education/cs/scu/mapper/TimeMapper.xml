@@ -9,6 +9,17 @@
         <result column="hours" property="hours"/>
     </resultMap>
 
+    <resultMap id="recentSleep" type="RecentSleepInfo">
+        <result column="avg_total" property="avgTotal" />
+        <result column="avg_sleep" property="avgSleep" />
+        <result column="avg_up" property="avgUp" />
+        <result column="qlty_bad" property="qltyBad" />
+        <result column="qlty_ord" property="qltyOrd" />
+        <result column="qlty_good" property="qltyGood" />
+        <result column="score" property="score" />
+        <result column="nickname" property="nickname" />
+    </resultMap>
+
     <insert id="registTime" parameterType="TimeInfo">
         INSERT INTO getuptime(username, up_time) values(#{userName}, #{getUpTime})
         <!--INSERT INTO sleep_info(username, uptime) values (#{userName}, #{getUpTime})-->
@@ -27,5 +38,42 @@
     <select id="getSleepTimeHistory" parameterType="TimeInfo" resultMap="timeInfo">
         SELECT * FROM sleeptime_2
         WHERE username=#{userName}
+    </select>
+
+    <insert id="updRecentSleepInfo" parameterType="RecentSleepInfo">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from recent_sleep where username=#{username}
+        </selectKey>
+        <if test="count > 0">
+            update recent_sleep
+            set username=#{username}, avg_total=#{avgTotal}, avg_sleep=#{avgSleep}, avg_up=#{avgUp},
+            qlty_bad=#{qltyBad}, qlty_ord=#{qltyOrd}, qlty_good=#{qltyGood}, score=#{score}
+            where username=#{username}
+        </if>
+        <if test="count == 0">
+            insert into recent_sleep
+            values (#{username}, #{avgTotal}, #{avgSleep}, #{avgUp}, #{qltyBad}, #{qltyOrd}, #{qltyGood}, #{score})
+        </if>
+    </insert>
+
+    <select id="getFriendsSleepRank" parameterType="String" resultMap="recentSleep">
+        SELECT r.*, a.nickname
+        FROM recent_sleep AS r, appuser AS a
+        WHERE r.username = a.username AND r.username IN (
+            SELECT friends
+            FROM friend_list
+            WHERE user_id=#{username})
+        UNION
+        SELECT r.*, a.nickname
+        FROM recent_sleep AS r, appuser AS a
+        WHERE r.username = a.username AND r.username=#{username}
+        ORDER BY score desc;
+    </select>
+
+    <select id="getUserRecentSleepInfo" parameterType="String" resultMap="recentSleep">
+        SELECT *
+        FROM recent_sleep
+        WHERE username=#{username}
+        LIMIT 1;
     </select>
 </mapper>

@@ -1,5 +1,6 @@
 package education.cs.scu.service;
 
+import education.cs.scu.entity.RecentSleepInfo;
 import education.cs.scu.entity.SleepInfo;
 import education.cs.scu.entity.TimeInfo;
 
@@ -16,4 +17,8 @@ public interface TimeService {
     TimeInfo getSleepTimeHistory(TimeInfo timeinfo) throws Exception;
 
     List<SleepInfo> getUptimeHistory(String username, String start, String end) throws Exception;
+
+    int updRecentSleepInfo(RecentSleepInfo sleepInfo) throws Exception;
+    List<RecentSleepInfo> getFriendsSleepRank(String username) throws Exception;
+    RecentSleepInfo getUserRecentSleepInfo(String username) throws Exception;
 }
